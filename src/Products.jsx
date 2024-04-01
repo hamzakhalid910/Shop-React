@@ -43,7 +43,7 @@ function Products() {
         ))}
       </div>
 
-      {/* {selectedProduct && (
+      {selectedProduct && (
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={() => setSelectedProduct(null)}>
@@ -52,9 +52,11 @@ function Products() {
             <h2>{selectedProduct.title}</h2>
             <h3>Description:</h3>
             <p>{selectedProduct.description}</p>
+            <h3>Price:</h3>
+            <p>${selectedProduct.price}</p>
           </div>
         </div>
-      )} */}
+      )}
     </>
   );
 }

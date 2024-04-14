@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux'; 
 import PropTypes from "prop-types";
+import "./App.css";
 
 const url = "https://dummyjson.com/products";
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const currentUser = useSelector(state => state.currentUser); 
 
   useEffect(() => {
-    async function FetchProducts() {
+    async function fetchProducts() {
       try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -16,13 +19,12 @@ function Products() {
         }
         const data = await response.json();
         const productsList = data.products;
-        console.log(productsList);
         setProducts(productsList);
       } catch (error) {
         console.error("There is an error:", error);
       }
     }
-    FetchProducts();
+    fetchProducts();
   }, []);
 
   const handleDetailsClick = (product) => {
@@ -31,7 +33,10 @@ function Products() {
 
   return (
     <>
-      <h1>Mobile Products</h1>
+      <div className="header">
+        <h1>Welcome, {currentUser}!</h1> 
+      </div>
+      <h2>Mobile Products</h2>
       <div className="products-container">
         {products.map((product) => (
           <div key={product.id} className="product-item">
